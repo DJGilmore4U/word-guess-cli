@@ -94,8 +94,10 @@ function keepPromptingUser() {
     }
     // If out of guesses, Player loses the game //
     else {
-        console.log('Sorry... I told you it was a tough list of words... Try again!'.random);
-        console.log('Good try though... The word was "'.random + game.currentWrd + '", in case you were curious.'.random);
+        console.log('Sorry... I told you it was a tough list of words... Try again!'.america);
+        console.log('Good try though... The word was "'.america + game.currentWrd + '", in case you were curious.'.america);
+        console.log('---------------------------GAME OVER---------------------------'.america);
+        console.log('--------Type "node index.js" + <enter> to play again!----------'.america);
     }
 }
 // Creates a new Game Object //
