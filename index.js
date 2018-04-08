@@ -4,6 +4,7 @@ var inquirer = require('inquirer');
 var guessWordList = require('./list.js');
 var checkForLetter = require('./word.js');
 var lettersToDisplay = require('./letter.js');
+var colors = require('colors');
 
 // Declaring Gloval Variables //
 var alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
@@ -23,11 +24,11 @@ var game = {
         var g = Math.floor(Math.random() * this.wordList.length);
         this.currentWrd = this.wordList[g];
         // Tells Player that Game is On! //
-        console.log('This is tough list of words... Do you think you can do it? Give it a shot!');
+        console.log('This is tough list of words... Do you think you can do it? Give it a shot!'.zebra);
         // Displays game progress //
         displayGame = new lettersToDisplay(this.currentWrd);
         displayGame.parseDisplay();
-        console.log('Guesses Left: ' + game.guessesRemaining);
+        console.log('Guesses Left: '.blue + game.guessesRemaining + ' !'.blue);
         // Asks player to pick a letter //
         keepPromptingUser();
     }
@@ -48,15 +49,15 @@ function keepPromptingUser() {
             var inputLetter = userInput.letter.toLowerCase();
             // If it is a valid selection //
             if (alphabet.indexOf(inputLetter) == -1) {
-                console.log('Sorry to tell you but "' + inputLetter + '" could not be found in the word. Try again!');
-                console.log('Guesses Left: ' + game.guessesRemaining);
-                console.log('Burner letters: ' + lettersAlreadyGuessed);
+                console.log('Sorry to tell you but "'.random + inputLetter + '" could not be found in the word. Try again!'.random);
+                console.log('Guesses Left: '.blue + game.guessesRemaining);
+                console.log('Burner letters: '.red + lettersAlreadyGuessed);
                 keepPromptingUser();
             }
             else if (alphabet.indexOf(inputLetter) != -1 && lettersAlreadyGuessed.indexOf(inputLetter) != -1) {
-                console.log('You already guessed "' + inputLetter + '"! Make sure you check your list of burner letters before submitting you guess!');
-                console.log('Guesses Left: ' + game.guessesRemaining);
-                console.log('Burner letters: ' + lettersAlreadyGuessed);
+                console.log('You already guessed "'.yellow + inputLetter + '"! Make sure you check your list of burner letters before submitting you guess!'.yellow);
+                console.log('Guesses Left: '.blue + game.guessesRemaining);
+                console.log('Burner letters: '.red + lettersAlreadyGuessed);
                 keepPromptingUser();
             }
             else {
@@ -72,20 +73,20 @@ function keepPromptingUser() {
                     displayGame.parseDisplay();
                     // Checks to see if the player won, updates remaining guesses //
                     if (displayGame.winner) {
-                        console.log('You win! Congrats!');
+                        console.log('You win! Congrats!'.rainbow);
                         return;
                     }
                     else {
-                        console.log('Guesses Left: ' + game.guessesRemaining);
-                        console.log('Burner letters: ' + lettersAlreadyGuessed);
+                        console.log('Guesses Left: '.blue + game.guessesRemaining);
+                        console.log('Burner letters: '.red + lettersAlreadyGuessed);
                         keepPromptingUser();
                     }
                 }
                 else {
                     game.guessesRemaining--;
                     displayGame.parseDisplay();
-                    console.log('Guesses Left: ' + game.guessesRemaining);
-                    console.log('Burner letters: ' + lettersAlreadyGuessed);
+                    console.log('Guesses Left: '.blue + game.guessesRemaining);
+                    console.log('Burner letters: '.red + lettersAlreadyGuessed);
                     keepPromptingUser();
                 }
             }
@@ -93,8 +94,8 @@ function keepPromptingUser() {
     }
     // If out of guesses, Player loses the game //
     else {
-        console.log('Sorry... I told you it was a tough list of words... Try again!');
-        console.log('Good try though... The word was "' + game.currentWrd + '", in case you were curious.');
+        console.log('Sorry... I told you it was a tough list of words... Try again!'.random);
+        console.log('Good try though... The word was "'.random + game.currentWrd + '", in case you were curious.'.random);
     }
 }
 // Creates a new Game Object //
